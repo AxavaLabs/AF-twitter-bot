@@ -1,2 +1,5 @@
 tweepy
 python-dotenv
+openai==0.28
+python-binance
+pandas
