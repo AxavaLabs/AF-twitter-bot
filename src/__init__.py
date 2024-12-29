@@ -12,8 +12,8 @@ class Worker:
 
   idx_twitter_username = 0
   question_confirm = "Check the following tweets to see if they contain any information related to a coin. Return a list where each entry corresponds to the result (True or False) for each tweet (Ex: [True, False]). Only respond in the given format, no additional explanations."
-  question_tweet_news = " just had some posts on Twitter that could affect the price of crypto. I’ll list them below in the following format: '{index}> {action}: {content}'. Your task is to analyze how these activities impact the overall crypto market or the price of a specific coin. Based on that, write a tweet offering advice to people, make sure to use emojis, hashtags, and include a fun element, avoid tagging others. Limit 75 words:"
-  question_tweet_coin_price = "Based on the hourly changes in Bitcoin prices, write a tweet advising people which coins to buy, sell, and hold. Be sure to use icons for engagement 💡📈📉💰 and include hashtags with the coin symbols, like #BTC, #ETH, etc., for better visibility. Should be written as a long paragraph like expert advice rather than a dry report, remember to add a fun element in this tweet. Limit 75 words: "
+  question_tweet_news = " just had some posts on Twitter that could affect the price of crypto. I’ll list them below in the following format: '{index}> {action}: {content}'. Your task is to analyze how these activities impact the overall crypto market or the price of a specific coin. Based on that, write a tweet offering advice to people, make sure to use emojis, hashtags, and include a fun element, avoid tagging others. Limit 45 words:"
+  question_tweet_coin_price = "Based on the hourly changes in Bitcoin prices, write a tweet advising people which coins to buy, sell, and hold. Be sure to use icons for engagement 💡📈📉💰 and include hashtags with the coin symbols, like #BTC, #ETH, etc., for better visibility. Should be written as a long paragraph like expert advice rather than a dry report, remember to add a fun element in this tweet. Limit 45 words: "
   
   def __init__(self, bearer_token, access_token, access_token_secret, api_key, api_secret_key, api_key_chatgpt):
     self.twitter_bot = TwitterBot(bearer_token,api_key, api_secret_key, access_token, access_token_secret)
@@ -62,7 +62,6 @@ class Worker:
       content = self.chatgpt_bot.question(question)
 
     # post
-    
     result = self.twitter_bot.post_tweet(content)
     current_time = datetime.now()
     print(f"{current_time} : {result}")
