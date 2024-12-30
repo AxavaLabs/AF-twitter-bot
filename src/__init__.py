@@ -62,7 +62,6 @@ class Worker:
       content = self.chatgpt_bot.question(question)
 
     # post
-    time.sleep(15)
     result = self.twitter_bot.post_tweet(content)
     current_time = datetime.now()
     print(f"{current_time} : {result}")
