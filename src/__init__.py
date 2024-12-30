@@ -5,8 +5,92 @@ import ast
 from datetime import datetime
 import time
 
-LIST_USER_TWITTER = ["elonmusk", "realDonaldTrump"]
-LIST_USERNAME = ["Elon Musk", "Donald Trump"]
+LIST_USER_TWITTER = ["elonmusk", "realDonaldTrump", "S4mmyEth",
+                    "stevenyuntcap",
+                    "aixbt_agent",
+                    "0xCygaar",
+                    "ahboyash",
+                    "owen1v9",
+                    "breadnbutter247",
+                    "art_xbt",
+                    "SMtrades_",
+                    "based16z",
+                    "DegenerateNews",
+                    "Darrenlautf",
+                    "l2beat",
+                    "smyyguy",
+                    "Fapital3",
+                    "poopmandefi",
+                    "DefiIgnas",
+                    "Jaa9_Bravo",
+                    "0xkuromi",
+                    "CryptoLimbo_",
+                    "cryptomocho",
+                    "CryptosArnault",
+                    "nobrainflip",
+                    "AltCryptoGems",
+                    "0xFinish",
+                    "0xUnihax0r",
+                    "CryptopepperP",
+                    "J777Crypto",
+                    "PyroNFT",
+                    "RomeoTrades",
+                    "tehMoonwalkeR",
+                    "offshoda",
+                    "RaAr3",
+                    "ThorTrades8",
+                    "crypto_leszcz",
+                    "brommmyy",
+                    "DeFi_Paanda",
+                    "ChristiaanDefi",
+                    "tedpillows",
+                    "RaAr3s",
+                    "andrewtalksdefi",
+                    "0xjaypeg",
+                    "0xAlan_"]
+LIST_USERNAME = ["Elon Musk", "Donald Trump", "S4mmyEth",
+                "stevenyuntcap",
+                "aixbt_agent",
+                "0xCygaar",
+                "ahboyash",
+                "owen1v9",
+                "breadnbutter247",
+                "art_xbt",
+                "SMtrades_",
+                "based16z",
+                "DegenerateNews",
+                "Darrenlautf",
+                "l2beat",
+                "smyyguy",
+                "Fapital3",
+                "poopmandefi",
+                "DefiIgnas",
+                "Jaa9_Bravo",
+                "0xkuromi",
+                "CryptoLimbo_",
+                "cryptomocho",
+                "CryptosArnault",
+                "nobrainflip",
+                "AltCryptoGems",
+                "0xFinish",
+                "0xUnihax0r",
+                "CryptopepperP",
+                "J777Crypto",
+                "PyroNFT",
+                "RomeoTrades",
+                "tehMoonwalkeR",
+                "offshoda",
+                "RaAr3",
+                "ThorTrades8",
+                "crypto_leszcz",
+                "brommmyy",
+                "DeFi_Paanda",
+                "ChristiaanDefi",
+                "tedpillows",
+                "RaAr3s",
+                "andrewtalksdefi",
+                "0xjaypeg",
+                "0xAlan_"]
 
 class Worker:
 
@@ -22,11 +106,11 @@ class Worker:
     
   def process(self):
 
-    # ## get post
-    # username = LIST_USER_TWITTER[self.idx_twitter_username]  
-    # tweets = self.twitter_bot.get_tweets(username=username)
-    # print(f"tweets: {tweets}" )
-    tweets = [{'id': 1873417011294093499, 'text': 'Please post a bit more positive, beautiful or informative content on this platform', 'type': 'original'}, {'id': 1873416748852203631, 'text': '@TheBabylonBee hahaha', 'type': 'reply'}, {'id': 1873416599153373597, 'text': 'RT @teslaownersSV: "It\'s important that people have enough babies to support civilization. Civilization might die with a bang or with a whi…', 'type': 'retweet'}, {'id': 1873414878712709321, 'text': '@FoxNewsSunday @RoKhanna Ro is sensible', 'type': 'reply'}, {'id': 1873414542019170523, 'text': '@TPointUK Insane', 'type': 'reply'}]
+    # get post
+    username = LIST_USER_TWITTER[self.idx_twitter_username]  
+    tweets = self.twitter_bot.get_tweets(username=username)
+    print(f"tweets: {tweets}" )
+    # tweets = [{'id': 1873417011294093499, 'text': 'Please post a bit more positive, beautiful or informative content on this platform', 'type': 'original'}, {'id': 1873416748852203631, 'text': '@TheBabylonBee hahaha', 'type': 'reply'}, {'id': 1873416599153373597, 'text': 'RT @teslaownersSV: "It\'s important that people have enough babies to support civilization. Civilization might die with a bang or with a whi…', 'type': 'retweet'}, {'id': 1873414878712709321, 'text': '@FoxNewsSunday @RoKhanna Ro is sensible', 'type': 'reply'}, {'id': 1873414542019170523, 'text': '@TPointUK Insane', 'type': 'reply'}]
     
     ## checkpost
     result_list = []
@@ -41,9 +125,10 @@ class Worker:
         print(f"Error parsing result: {e}")
 
     ## create massage
-    question = LIST_USERNAME[self.idx_twitter_username] + self.question_tweet_news
+    
     if True in result_list:
       j = 0
+      question = LIST_USERNAME[self.idx_twitter_username] + self.question_tweet_news
       for i, result in enumerate(result_list):
         if result == True:
           j += 1
@@ -62,10 +147,11 @@ class Worker:
       content = self.chatgpt_bot.question(question)
 
     # post
-    content = content.replace("\"", "")
-    result = self.twitter_bot.post_tweet(content)
-    current_time = datetime.now()
-    print(f"{current_time} : {result}")
+    if True in result_list or self.idx_twitter_username == 0:
+      content = content.replace("\"", "")
+      result = self.twitter_bot.post_tweet(content)
+      current_time = datetime.now()
+      print(f"{current_time} : {result}")
     
     # update index
     self.idx_twitter_username += 1
